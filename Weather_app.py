@@ -78,11 +78,11 @@ if st.button("Get Weather") and city:
         for day in forecast_day:
             date = day['date']
             if unit == 'Celsius':
-                min_temp = ['day']['mintemp_c']
-                max_temp = ['day']['maxtemp_c']
+                min_temp = day['day']['mintemp_c']
+                max_temp = day['day']['maxtemp_c']
             else:
-                min_temp = ['day']['mintemp_f']
-                max_temp = ['day']['maxtemp_f']
+                min_temp = day['day']['mintemp_f']
+                max_temp = day['day']['maxtemp_f']
                 
         condition = day['day']['condition']['text']
         icon_url = 'https:'+ day['day']['condition']['icon']
@@ -128,6 +128,7 @@ if st.button("Get Weather") and city:
         
         
             
+
 
 
 
