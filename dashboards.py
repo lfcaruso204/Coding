@@ -2,8 +2,8 @@
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import requests
+# import plotly.express as px
+# import requests
 
 st.set_page_config(layout='wide')
 
@@ -133,6 +133,8 @@ df_filtered
 col1, col2 = st.columns(2)
 col3, col4, col5 = st.columns(3)
 
+
+'''
 fig_date = px.bar(df_filtered, x='Date', y='Sales', color='City', title='Faturamento por dia')
 col1.plotly_chart(fig_date, use_container_widht=True)
 
@@ -148,6 +150,31 @@ col4.plotly_chart(fig_kind, use_container_widht=True)
 
 fig_rating = px.pie(df_filtered, y='Rating', x='City', title='Avaliação')
 col5.plotly_chart(fig_rating, use_container_widht=True)
+'''
+
+# vou trocar por streamlit
+
+# 1. Faturamento por dia
+col1.markdown("### Faturamento por dia")
+col1.bar_chart(df_filtered, x='Date', y='Sales', color='City', use_container_width=True)
+
+# 2. Faturamento por tipo de produto
+# Nota: st.bar_chart não suporta 'orientation=h'. Inverti os eixos.
+col2.markdown("### Faturamento por tipo de produto")
+col2.bar_chart(df_filtered, x='Product line', y='Sales', color='City', use_container_width=True)
+
+# 3. Faturamento por filial
+col3.markdown("### Faturamento por filial")
+col3.bar_chart(df_filtered, x='City', y='Sales', use_container_width=True)
+
+# 4. Faturamento por tipo de pagamento (Adaptado para Barras)
+col4.markdown("### Faturamento por tipo de pagamento")
+col4.bar_chart(df_filtered, x='Payment', y='Sales', use_container_width=True)
+
+# 5. Avaliação (Média por cidade)
+col5.markdown("### Avaliação média por cidade")
+df_rating = df_filtered.groupby('City')[['Rating']].mean()
+col5.bar_chart(df_rating, use_container_width=True)
 
 
 
@@ -167,6 +194,7 @@ col5.plotly_chart(fig_rating, use_container_widht=True)
         
         
         
+
 
 
 
